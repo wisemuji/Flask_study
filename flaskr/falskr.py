@@ -4,7 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, render_template
 
 
 app = Flask(__name__)
-app = config.from_object(__name__)
+app.config.from_object(__name__)
 
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flaskr.db'),
