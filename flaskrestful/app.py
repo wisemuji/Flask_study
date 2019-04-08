@@ -1,37 +1,47 @@
 from flask import Flask
-from flask_restful import Resource, Api
-from flask_restful import reqparse
+from flask_cors import CORS
+from flask_restplus import Resource, Api, reqparse
 
 app = Flask(__name__)
-api = Api(app)
-class RegistUser(Resource):
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('name', type=str)
-        parser.add_argument('email', type=str)
-        args = parser.parse_args()
+CORS(app)
+title = 'my homepage'
+api = Api(app=app)
 
-        name = args['name']
-        email = args['email']
 
-        return {'name': name, 'email': email}
+class HealthCheck(Resource):
 
-api.add_resource(RegistUser, '/user')
+def get(self):
+'''
+사용자가 보낸 parameter를 통해
+데이터를 보내줍니다.
+:return:
+'''
+return {'msg': 'get ok'}
+
+def post(self):
+'''
+사용자가 보낸 session 정보를 통해
+수정 역할을 합니다.
+:return: 수정 여부를 반환합니다.
+'''
+return {'msg': 'post ok'}
+
+def put(self):
+'''
+사용자가 보낸 데이터를 저장한다.
+:return:
+'''
+return {'msg': 'put ok'}
+
+def delete(self):
+'''
+데이터를 삭제한다.
+:return:
+'''
+return {'msg': 'delete ok'}
+
+
+api.add_resource(HealthCheck, '/v0.0/test')
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.run(debug=True, port=5002)
