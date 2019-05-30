@@ -6,7 +6,7 @@ app.config.update(DEBUG=True)
 
 file_log_format = logging.Formatter('%(levelname)-8s %(message)s')
 
-file_logger = logging.FileHandler("flask_instance.log", mode='a', encoding='utf-8', delay=False) #mode='a'는 파일이 있다면 이어서 쓰라는 뜻
+file_logger = logging.RotatingFileHandler("flask_instance.log", mode='a', maxBytes=10485760 backupCount=5 encoding='utf-8', delay=False) #mode='a'는 파일이 있다면 이어서 쓰라는 뜻
 file_logger.setFormatter(file_log_format)
 
 app.logger.addHandler(file_logger)
