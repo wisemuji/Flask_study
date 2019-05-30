@@ -17,7 +17,6 @@ class SQLAlchemySession(CallbackDict, SessionMixin):
         self.new = new
         self.modified = False
 
-
 class SQLAlchemySessionInterface(SessionInterface):
     session_class = SQLAlchemySession
     serializer = pickle
